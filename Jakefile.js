@@ -1,7 +1,12 @@
 (() => {
   
-  const EXPECTED_NODE_VERSION = "v8.11.2";
-  
+  const semver = require('semver');
+
+  const packageJson = require('./package'),
+        expectedVersion = packageJson.engines.node,
+        actualVersion = process.version;
+
+
   desc("Default build");
   task("default", ["version"], () => {
     console.log("\n\nBUILD OK");
@@ -11,11 +16,11 @@
   desc("Check Node Version");
   task("version", () => {
     console.log("Checking Node version: .");
-  
-    const actualVersion = process.version;
-    if (actualVersion !== EXPECTED_NODE_VERSION) {
+    
+    // if (actualVersion !== expectedVersion) {
+    if (semver.neq(actualVersion, expectedVersion)) {
       // This is a Jake function
-      fail(`Incorrect Node version: expected ${EXPECTED_NODE_VERSION}, but was ${actualVersion}`);
+      fail(`Incorrect Node version: expected ${expectedVersion}, but was ${actualVersion}`);
     }
   });
   
