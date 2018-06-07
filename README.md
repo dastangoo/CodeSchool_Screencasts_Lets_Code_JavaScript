@@ -1,6 +1,5 @@
 How To: Tabs
  ==============
  
- To run the build:
- 1. Install Jake: `npm i -g jake`
- 2. Run Jake: `jake`
+To run the build:
+Run `./jake.sh` (Mac/Unix) or `jake` (Windows)
